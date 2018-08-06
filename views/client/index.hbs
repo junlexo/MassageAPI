@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <title>Blog of Sadi Mahmud</title>
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.26.3/css/uikit.min.css" />
+    <link rel="stylesheet" href="./js/app/client/app/styles/mainClient.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <script src="js/vendor/es6-shim/es6-shim.min.js"></script>
+    <script src="js/vendor/zone.js/dist/zone.js"></script>
+    <script src="js/vendor/reflect-metadata/Reflect.js"></script>
+    <script src="js/vendor/systemjs/dist/system.src.js"></script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
+    <script src="systemjs.config.js"></script>
+</head>
+<body>
+    <my-app>Loading...</my-app>
+
+<script>
+    System.import('app').catch(function(err){ console.error(err); });
+</script>
+</body>
+</html>
