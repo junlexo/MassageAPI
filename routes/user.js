@@ -3,6 +3,8 @@ var express = require('express');
 var router  = express.Router();
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
+var Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 router.post('/signin', function(req, res) {
   models.User.findOne({ where: {username: req.body.username} }).then(function(user) {
@@ -28,7 +30,7 @@ router.post('/signin', function(req, res) {
       });
   });
 });
-router.get('/all', function(req, res, next){
+router.get('/all', function(req, res, next){   
   models.User.findAll().then(function(users) {
     if(users) {
       return res.status(200).json({
@@ -52,20 +54,46 @@ router.get('/remove/:id', function(req, res, next){
           });
       });
 });
-router.post('/register', function(req, res) {
-  var decode = jwt.decode(req.query.token);
-  models.User.create({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password
-  }).then( function(user){
-    if(user) {
-      return res.status(200).json({
-        message: 'User Registed',
-        user: user
-      });
-    }
-  });
+router.post('/register', function(req, res) {  
+  models.User.findOne({ where: {
+      [Op.or]: [
+        { username: req.body.username },
+        { email: req.body.email }
+      ] 
+    } 
+  }).then(function(user) {   
+    if(user)
+    { 
+      if(user.username === req.body.username) {  
+        console.log('username already exist');      
+        return res.status(200).json({
+                message: 'username already exist',                
+                error: 1                
+            });
+      }
+      else
+      if (user.email === req.body.email){
+        console.log('email already exist');
+        return res.status(200).json({
+                message: 'email already exist',                
+                error: 2                
+            });
+      }
+    }    
+    models.User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password
+    }).then( function(userNew){
+      if(userNew) {
+        return res.status(200).json({
+          message: 'User Registed',
+          error: 0,
+          user: user
+        });
+      }
+    });
+  });  
 });
 router.post('/update', function(req, res) {  
   var decode = jwt.decode(req.query.token); 

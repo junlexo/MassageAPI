@@ -30,9 +30,9 @@ app.use(function (req, res, next) {
     // res.setHeader('Access-Control-Allow-Origin', '*');
     // res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE');
         res.setHeader("Access-Control-Allow-Origin", "*");
-        res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
-        res.setHeader("Access-Control-Max-Age", "3600");
-        res.setHeader("Access-Control-Allow-Headers", "x-requested-with, content-type");
+        res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, PATCH, DELETE");
+        res.setHeader("Access-Control-Max-Age", "84000");
+        res.setHeader("Access-Control-Allow-Headers", "x-requested-with, content-type");        
     next();
 });
 app.use('/admin',adminRoutes);
