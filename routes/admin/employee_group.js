@@ -52,9 +52,7 @@ router.post('/update', function(req, res) {
   models.EmployeeGroup.findOne({ where: { code: req.body.code } })
   .then(function (groupEmp) {
     // Check if record exists in db  
-    if (groupEmp) {   
-      bcrypt.hash(req.body.password, 10, function(err, hash) {
-    // Store hash in database    
+    if (groupEmp) {        
         groupEmp.update({
           name: req.body.name          
         })
@@ -65,8 +63,7 @@ router.post('/update', function(req, res) {
               error: 0,
               results: resp
             });
-        })
-      });
+        })      
     }
     else
     {
