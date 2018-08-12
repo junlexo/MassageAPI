@@ -119,7 +119,7 @@ router.post('/update', function(req, res) {
   });
 });
 router.get('/single/:id', function(req, res, next){
-  models.User.findOne({where: {username: req.params.id}}).then(function(user) {
+  models.User.findOne({where: {id: req.params.id}}).then(function(user) {
     if(user) {
       return res.status(200).json({
         message: 'User Found',
