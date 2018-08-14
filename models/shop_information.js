@@ -3,63 +3,50 @@
 module.exports = function(sequelize, DataTypes) {
   var Shop_information = sequelize.define("Shop_information", {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
-      autoIncrement: true
+      defaultValue: DataTypes.UUIDV4
     },
     shop_name: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      // validate: {
-      //   notEmpty: true
-      // }
+      required: true
     },
     address: {
       type: DataTypes.STRING,
-      allowNull: false,
-      // validate: {
-      //   notEmpty: true
-      // }
+      allowNull: false
     },
     service_type: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.ENUM,
+      values: ['massage&spa', 'foot_massage', 'body_massage'],
+      allowNull: false
+    },
+    district: {
+      type: DataTypes.STRING,
+      allowNull: false
       // validate: {
       //   notEmpty: true
       // }
     },
     province: {
-      type: DataTypes.INTEGER,
-      // validate: {
-      //   notEmpty: true
-      // }
-    },
-    district: {
-      type: DataTypes.INTEGER,
-      // validate: {
-      //   notEmpty: true
-      // }
-    },
-    zone: {
       type: DataTypes.STRING,
-      // allowNull: false,
+      allowNull: false
+      // validate: {
+      //   notEmpty: true
+      // }
+    },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: false
       // validate: {
       //   notEmpty: true
       // }
     },
     detail_direction: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+      type: DataTypes.STRING
     },    
     phone: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
@@ -72,17 +59,17 @@ module.exports = function(sequelize, DataTypes) {
     },
     website: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+      //allowNull: false,
+      // validate: {
+      //   notEmpty: true
+      // }
     },
     brief_information: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+      type: DataTypes.STRING
+      // allowNull: false,
+      // validate: {
+      //   notEmpty: true
+      // }
     } /*,
 	map_location: {
       type: DataTypes.REAL,

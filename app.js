@@ -11,6 +11,7 @@ var appRoutes = require('./routes/app');
 var userRoutes = require('./routes/user');
 var postRoutes = require('./routes/post');
 var adminRoutes = require('./routes/admin/admin');
+var shopInfoRoutes = require('./routes/shop_information');
 var app = express();
 
 // view engine setup
@@ -31,10 +32,12 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE');
     next();
 });
+
+app.use('/', appRoutes);
 app.use('/admin',adminRoutes);
 app.use('/users', userRoutes); 
 app.use('/posts', postRoutes);
-app.use('/', appRoutes);
+app.use('/shopinfo',shopInfoRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

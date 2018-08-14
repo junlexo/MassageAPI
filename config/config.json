@@ -1,17 +1,22 @@
 {
-  "development": {
+  "test": {
     "username": "root",
     "password": "vantri1978",
     "database": "Spa",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
-  "test": {
+  "development": {
     "username": "root",
     "password": null,
-    "database": "database_test",
+    "database": "test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "define": {
+    "charset": "utf8",
+    "collate": "utf8_general_ci", 
+    "timestamps": true
+    }
   },
   "production": {
     "username": "root",
