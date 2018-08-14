@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var Shop_information = sequelize.define("Shop_information", {
+  var Shop = sequelize.define("Shop", {
     id: {
       type: DataTypes.UUID,
       primaryKey: true,
@@ -9,7 +9,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     shop_name: {
       type: DataTypes.STRING,
-      required: true
+      required: true,
+      unique: true,
+      allowNull: false
     },
     address: {
       type: DataTypes.STRING,
@@ -51,7 +53,7 @@ module.exports = function(sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      //unique: true,
       validate: {
         notEmpty: true,
         isEmail: true
@@ -70,7 +72,12 @@ module.exports = function(sequelize, DataTypes) {
       // validate: {
       //   notEmpty: true
       // }
-    } /*,
+    },
+    user_id: {
+      type: DataTypes.UUID,
+      allowNull: false
+    }
+    /*,
 	map_location: {
       type: DataTypes.REAL,
       allowNull: false,
@@ -78,8 +85,7 @@ module.exports = function(sequelize, DataTypes) {
         notEmpty: true
       }
     }*/
-  }
-  );
+  });
 
-  return Shop_information;
+  return Shop;
 };

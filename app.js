@@ -11,7 +11,7 @@ var appRoutes = require('./routes/app');
 var userRoutes = require('./routes/user');
 var postRoutes = require('./routes/post');
 var adminRoutes = require('./routes/admin/admin');
-var shopInfoRoutes = require('./routes/shop_information');
+var shopInfoRoutes = require('./routes/shop');
 var app = express();
 
 // view engine setup

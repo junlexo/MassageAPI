@@ -7,9 +7,9 @@ var salt = bcrypt.genSaltSync(10);
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
-      autoIncrement: true
+      defaultValue: DataTypes.UUIDV4
     },
     username: {
       type: DataTypes.STRING,
@@ -36,7 +36,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   },
-    {
+  {
       /*instanceMethods: {
         passCheck: function() {
           return this.password;
@@ -49,7 +49,6 @@ module.exports = function(sequelize, DataTypes) {
         }
       }
     }
-  );
-
+    );
   return User;
 };
