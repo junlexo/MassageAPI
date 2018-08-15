@@ -33,5 +33,13 @@ Object.keys(db).forEach(function(modelName) {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+ 
+//Models/tables
+db.User = require('../models/user.js')(sequelize, Sequelize);  
+db.Shop = require('../models/shop.js')(sequelize, Sequelize);
+
+ //Relations
+db.Shop.belongsTo(db.User, {foreignKey: 'user_id', targetKey: 'id', onDelete: 'CASCADE'});  
+db.User.hasMany(db.Shop, {foreignKey: 'user_id', sourceKey: 'id', onDelete: 'CASCADE'});  
 
 module.exports = db;
