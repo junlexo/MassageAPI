@@ -12,6 +12,7 @@ var userRoutes = require('./routes/user');
 var postRoutes = require('./routes/post');
 var adminRoutes = require('./routes/admin/admin');
 var employGroup = require('./routes/admin/employee_group');
+var treatmentType = require('./routes/admin/treatment_type');
 var app = express();
 
 // view engine setup
@@ -40,6 +41,7 @@ app.use('/admin',adminRoutes);
 app.use('/users', userRoutes); 
 app.use('/posts', postRoutes);
 app.use('/GroupEmployees',employGroup);
+app.use('/TreatMentType',treatmentType);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler
