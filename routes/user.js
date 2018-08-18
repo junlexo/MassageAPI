@@ -7,6 +7,7 @@ var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 router.post('/signin', function(req, res) {
+
   models.User.findOne({ where: {username: req.body.username} }).then(function(user) {
       if(!user) {
         console.log('no user found');
@@ -30,11 +31,12 @@ router.post('/signin', function(req, res) {
       });
   });
 });
+
 router.get('/all', function(req, res, next){   
   models.User.findAll().then(function(users) {
     if(users) {
       return res.status(200).json({
-        message: 'Users Found',
+        message: 'Users Found',        
         users: users
       });
     }

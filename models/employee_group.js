@@ -1,11 +1,11 @@
-"use strict";
+  "use strict";
 
 module.exports = function(sequelize, DataTypes) {
   var EmployeeGroup = sequelize.define("EmployeeGroup", {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       primaryKey: true,
-      autoIncrement: true
+      defaultValue: DataTypes.UUIDV4     
     },
     name: {
       type: DataTypes.STRING,
@@ -22,16 +22,19 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         notEmpty: true        
       }
+    },
+    user_id: {
+      type: DataTypes.UUID,
+      allowNull: true
     }
   },
     {
-      /*instanceMethods: {
-        passCheck: function() {
-          return this.password;
-        },
-      },*/      
+      classMethods: {
+        associate: function(models) {
+          EmployeeGroup.belongsTo(models.Shop, {foreignKey: 'id', targetKey: 'user_id'});
+        }
+      }     
     }
   );
-
   return EmployeeGroup;
 };

@@ -77,6 +77,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.UUID,
       allowNull: false
     }
+  }, {
+      classMethods: { 
+        associate: function(models) {
+          Shop.hasMany(models.EmployeeGroup, {foreignKey: 'id', sourceKey: 'id', onDelete: 'CASCADE'});
+        }
+      }         
     /*,
 	map_location: {
       type: DataTypes.REAL,

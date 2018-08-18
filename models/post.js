@@ -29,7 +29,6 @@ module.exports = function(sequelize, DataTypes) {
         Post.belongsTo(models.User)
       }
     }
-    
   });
 
   return Post;
