@@ -12,6 +12,7 @@ var postRoutes = require('./routes/post');
 var adminRoutes = require('./routes/admin/admin');
 var employGroup = require('./routes/admin/employee_group');
 var treatmentType = require('./routes/admin/treatment_type');
+var serviceRoutes = require('./routes/admin/service');
 var shopInfoRoutes = require('./routes/shop');
 var app = express();
 
@@ -44,6 +45,7 @@ app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
 app.use('/GroupEmployees',employGroup);
 app.use('/TreatMentType',treatmentType);
+app.use('/service', serviceRoutes);
 app.use('/', appRoutes);
 app.use('/shopinfo',shopInfoRoutes);
 
