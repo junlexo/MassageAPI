@@ -11,13 +11,19 @@ router.post('/signin', function(req, res) {
   models.User.findOne({ where: {username: req.body.username} }).then(function(user) {
       if(!user) {
         console.log('no user found');
-        return;
+        return res.status(200).json({
+          message: 'invalid password',
+          error: 2
+        });
       }
 
       bcrypt.compare(req.body.password, user.password, function(err, usr) {
           if( !usr ) {
             console.log('invalid password');
-            return;
+            return res.status(200).json({
+                message: 'invalid password',
+                error: 1
+            });;
           }
           else {
             var token = jwt.sign({user: user}, 'secret', {expiresIn: 3600});
@@ -25,7 +31,8 @@ router.post('/signin', function(req, res) {
             return res.status(200).json({
                 message: 'success',
                 token: token,
-                userId: user.id
+                userId: user.id,
+                error: 0
             });
           }
       });
