@@ -79,9 +79,7 @@ router.post('/register', function(req, res) {
                 message: 'username already exist',                
                 error: 1                
             });
-      }
-      else
-      if (user.email === req.body.email){
+      } else if(user.email === req.body.email) {
         console.log('email already exist');
         return res.status(200).json({
                 message: 'email already exist',                
