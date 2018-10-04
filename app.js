@@ -12,8 +12,13 @@ var postRoutes = require('./routes/post');
 var adminRoutes = require('./routes/admin/admin');
 var employGroup = require('./routes/admin/employee_group');
 var treatmentType = require('./routes/admin/treatment_type');
-var shopInfoRoutes = require('./routes/shop');
+var shopRoutes = require('./routes/shop');
+var countryRoutes = require('./routes/country');
+var provinceRoutes = require('./routes/province');
+var serviceRoutes = require('./routes/shop_service');
+var statusRoutes = require('./routes/status');
 var app = express();
+global._basedir = __dirname;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,15 +31,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(__dirname));
 
 app.use(function (req, res, next) {
-    // res.setHeader('Access-Control-Allow-Origin', '*');
-    // res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE');
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, PATCH, DELETE");
-        res.setHeader("Access-Control-Max-Age", "84000");
-        res.setHeader("Access-Control-Allow-Headers", "x-requested-with, content-type");        
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, PATCH, DELETE");
+    res.setHeader("Access-Control-Max-Age", "84000");
+    res.setHeader("Access-Control-Allow-Headers",
+     "x-requested-with, content-type, Access-Control-Allow-Headers, Access-Control-Request-Method, Access-Control-Request-Headers");        
     next();
 });
 
@@ -44,8 +48,11 @@ app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
 app.use('/GroupEmployees',employGroup);
 app.use('/TreatMentType',treatmentType);
-app.use('/', appRoutes);
-app.use('/shopinfo',shopInfoRoutes);
+app.use('/shop',shopRoutes);
+app.use('/country',countryRoutes);
+app.use('/province',provinceRoutes);
+app.use('/service',serviceRoutes);
+app.use('/status',statusRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
