@@ -14,6 +14,7 @@ var employGroup = require('./routes/admin/employee_group');
 var treatmentType = require('./routes/admin/treatment_type');
 var shopRoutes = require('./routes/shop');
 var countryRoutes = require('./routes/country');
+var reviewRoutes = require('./routes/admin/review');
 var provinceRoutes = require('./routes/province');
 var serviceRoutes = require('./routes/shop_service');
 var statusRoutes = require('./routes/status');
@@ -53,6 +54,7 @@ app.use('/country',countryRoutes);
 app.use('/province',provinceRoutes);
 app.use('/service',serviceRoutes);
 app.use('/status',statusRoutes);
+app.use('/review',reviewRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
