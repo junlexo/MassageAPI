@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Shop = sequelize.define("Shop", {
-    id: {
+    shopID: {
       type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: DataTypes.UUIDV4
@@ -10,70 +10,38 @@ module.exports = function(sequelize, DataTypes) {
     shop_name: {
       type: DataTypes.STRING,
       required: true,
-      unique: true,
+      unique: true, 
       allowNull: false
     },
-    address: {
+    shop_addr: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    service_type: {
-      type: DataTypes.ENUM,
-      values: ['massage&spa', 'foot_massage', 'body_massage'],
+    provinceID:{
+      type: DataTypes.UUID,
       allowNull: false
     },
-    district: {
-      type: DataTypes.STRING,
+    countryID:{
+      type: DataTypes.UUID,
       allowNull: false
-      // validate: {
-      //   notEmpty: true
-      // }
     },
-    province: {
-      type: DataTypes.STRING,
-      allowNull: false
-      // validate: {
-      //   notEmpty: true
-      // }
+    statusID: {
+      type: DataTypes.UUID
     },
-    country: {
-      type: DataTypes.STRING,
-      allowNull: false
-      // validate: {
-      //   notEmpty: true
-      // }
-    },
-    detail_direction: {
+    shop_website:{
       type: DataTypes.STRING
-    },    
-    phone: {
+    },
+    shop_photo:{
+      type: DataTypes.STRING
+    },
+    shop_desc:{
       type: DataTypes.STRING,
+    },
+    serviceID:{
+      type: DataTypes.UUID,
       allowNull: false
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      //unique: true,
-      validate: {
-        notEmpty: true,
-        isEmail: true
-      }
-    },
-    website: {
-      type: DataTypes.STRING,
-      //allowNull: false,
-      // validate: {
-      //   notEmpty: true
-      // }
-    },
-    brief_information: {
-      type: DataTypes.STRING
-      // allowNull: false,
-      // validate: {
-      //   notEmpty: true
-      // }
-    },
-    user_id: {
+    adminID:{
       type: DataTypes.UUID,
       allowNull: false
     }

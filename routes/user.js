@@ -8,7 +8,7 @@ const Op = Sequelize.Op;
 
 router.post('/signin', function(req, res) {
 
-  models.User.findOne({ where: {username: req.body.username} }).then(function(user) {
+  models.User.findOne({ where: {us_username: req.body.username} }).then(function(user) {
       if(!user) {
         console.log('no user found');
         return res.status(200).json({
@@ -17,7 +17,7 @@ router.post('/signin', function(req, res) {
         });
       }
 
-      bcrypt.compare(req.body.password, user.password, function(err, usr) {
+      bcrypt.compare(req.body.password, user.us_password, function(err, usr) {
           if( !usr ) {
             console.log('invalid password');
             return res.status(200).json({
@@ -27,12 +27,12 @@ router.post('/signin', function(req, res) {
           }
           else {
             var token = jwt.sign({user: user}, 'secret', {expiresIn: 3600});
-            console.log('token: '+token+'userId'+user.id);
+            console.log('token: '+token+'userId'+user.userID);
             return res.status(200).json({
                 message: 'success',
                 token: token,
-                userId: user.id,
-                error: 0
+                error: 0,
+                userId: user.userID
             });
           }
       });
@@ -66,20 +66,22 @@ router.get('/remove/:id', function(req, res, next){
 router.post('/register', function(req, res) {  
   models.User.findOne({ where: {
       [Op.or]: [
-        { username: req.body.username },
-        { email: req.body.email }
+        { us_username: req.body.username },
+        { us_email: req.body.email }
       ] 
     } 
   }).then(function(user) {   
     if(user)
     { 
-      if(user.username === req.body.username) {  
+      if(user.us_username === req.body.username) {  
         console.log('username already exist');      
         return res.status(200).json({
                 message: 'username already exist',                
                 error: 1                
             });
-      } else if(user.email === req.body.email) {
+      }
+      else
+      if (user.us_email === req.body.email){
         console.log('email already exist');
         return res.status(200).json({
                 message: 'email already exist',                
@@ -88,9 +90,9 @@ router.post('/register', function(req, res) {
       }
     }    
     models.User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password
+      us_username: req.body.username,
+      us_email: req.body.email,
+      us_password: req.body.password
     }).then( function(userNew){
       if(userNew) {
         return res.status(200).json({
@@ -111,8 +113,8 @@ router.post('/update', function(req, res) {
       bcrypt.hash(req.body.password, 10, function(err, hash) {
     // Store hash in database    
         user.update({
-          email: req.body.email,
-          password: hash
+          us_email: req.body.email,
+          us_password: hash
         })
         .then(function (resp) {
           if(resp)
@@ -126,7 +128,7 @@ router.post('/update', function(req, res) {
   });
 });
 router.get('/single/:id', function(req, res, next){
-  models.User.findOne({where: {id: req.params.id}}).then(function(user) {
+  models.User.findOne({where: {userID: req.params.id}}).then(function(user) {
     if(user) {
       return res.status(200).json({
         message: 'User Found',
